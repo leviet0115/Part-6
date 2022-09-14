@@ -30,9 +30,28 @@ const reducer = (state = initialState, action) => {
       const changedAnec = { ...anec, votes: anec.votes + 1 };
       return state.map((anec) => (anec.id === id ? changedAnec : anec));
 
+    case "ADD": {
+      const newAnec = asObject(action.data);
+      return state.concat(newAnec);
+    }
+
     default:
       return state;
   }
+};
+
+export const addNewAnec = (anec) => {
+  return {
+    type: "ADD",
+    data: anec,
+  };
+};
+
+export const voting = (id) => {
+  return {
+    type: "VOTE",
+    data: id,
+  };
 };
 
 export default reducer;
