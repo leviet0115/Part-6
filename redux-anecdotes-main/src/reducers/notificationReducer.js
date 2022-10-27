@@ -8,12 +8,11 @@ export const notiSlice = createSlice({
   name: "notification",
   initialState,
   reducers: {
-    notifyMsg(state, action) {
-      return { ...state, msg: action.payload };
-    },
-
     turnOn(state, action) {
-      return { ...state, isOn: true };
+      return {
+        isOn: true,
+        msg: action.payload,
+      };
     },
 
     turnOff(state, action) {

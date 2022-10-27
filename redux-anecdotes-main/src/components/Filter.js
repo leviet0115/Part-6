@@ -8,6 +8,7 @@ const Filter = () => {
   const handleChange = (event) => {
     dispatch(filterBy(event.target.value));
   };
+  
   const style = {
     marginBottom: 10,
   };

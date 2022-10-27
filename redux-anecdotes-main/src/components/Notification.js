@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { notifyMsg, turnOn, turnOff } from "../reducers/notificationReducer";
+import { turnOn, turnOff } from "../reducers/notificationReducer";
+import store from "../store";
 
 const Notification = () => {
   const noti = useSelector((state) => state.notification);
@@ -14,9 +15,9 @@ const Notification = () => {
   return <div style={style}>{noti.msg}</div>;
 };
 
-export const notify = (msg, dispatch) => {
-  dispatch(notifyMsg(msg));
-  dispatch(turnOn());
+export const notify = (msg) => {
+  const dispatch = store.dispatch;
+  dispatch(turnOn(msg));
   setTimeout(() => {
     dispatch(turnOff());
   }, 5000);
