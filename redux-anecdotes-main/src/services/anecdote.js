@@ -11,3 +11,5 @@ export const saveAnec = async (anec) => {
   const response = await axios.post(baseUrl, { content: anec });
   return response.data;
 };
+
+export const anecServices = { getAll, saveAnec };

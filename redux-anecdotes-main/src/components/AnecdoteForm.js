@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addNewAnec } from "../reducers/anecdoteReducer";
-import { saveAnec } from "../services/anecdote";
+import { createAnec } from "../reducers/anecdoteReducer";
 import { notify } from "./Notification";
 
 const AnecdoteForm = () => {
@@ -9,10 +8,8 @@ const AnecdoteForm = () => {
   const add = async (e) => {
     e.preventDefault();
     const anec = e.target.anec.value;
-    const savedAnec = await saveAnec(anec);
-    console.log(savedAnec);
     //console.log(anec);
-    dispatch(addNewAnec(anec));
+    dispatch(createAnec(anec));
     e.target.anec.value = "";
     const msg = "You have added '" + anec + "'";
     notify(msg);

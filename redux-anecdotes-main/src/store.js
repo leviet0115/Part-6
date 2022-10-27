@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { filterSlice } from "./reducers/filterReducer";
 import { notiSlice } from "./reducers/notificationReducer";
-import { addAnecs, anecdoteSlice } from "./reducers/anecdoteReducer";
-import { getAll } from "./services/anecdote";
+import { anecdoteSlice } from "./reducers/anecdoteReducer";
 
 const store = configureStore({
   reducer: {
@@ -10,11 +9,6 @@ const store = configureStore({
     notification: notiSlice.reducer,
     filter: filterSlice.reducer,
   },
-});
-
-getAll().then((data) => {
-  console.log("from store", data);
-  store.dispatch(addAnecs(data));
 });
 
 export default store;
