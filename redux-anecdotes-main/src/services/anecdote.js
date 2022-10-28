@@ -8,8 +8,14 @@ export const getAll = async () => {
 };
 
 export const saveAnec = async (anec) => {
-  const response = await axios.post(baseUrl, { content: anec });
+  const response = await axios.post(baseUrl, anec);
   return response.data;
 };
 
-export const anecServices = { getAll, saveAnec };
+export const saveVote = async (id, anec) => {
+  const url = baseUrl + "/" + id;
+  const response = await axios.put(url, anec);
+  return response.data;
+};
+
+export const anecServices = { getAll, saveAnec, saveVote };
