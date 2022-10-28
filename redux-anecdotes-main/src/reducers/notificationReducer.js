@@ -21,4 +21,17 @@ export const notiSlice = createSlice({
   },
 });
 
-export const { notifyMsg, turnOff, turnOn } = notiSlice.actions;
+export const setNotification = (msg, time) => {
+  return async (dispatch) => {
+    console.log("setting noti with", msg, "in ", time);
+    dispatch(turnOn(msg));
+    console.log("noti on");
+    setTimeout(() => {
+      dispatch(turnOff());
+    }, time * 1000);
+
+    console.log("noti off");
+  };
+};
+
+export const { turnOff, turnOn } = notiSlice.actions;

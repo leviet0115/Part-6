@@ -15,12 +15,4 @@ const Notification = () => {
   return <div style={style}>{noti.msg}</div>;
 };
 
-export const notify = (msg) => {
-  const dispatch = store.dispatch;
-  dispatch(turnOn(msg));
-  setTimeout(() => {
-    dispatch(turnOff());
-  }, 5000);
-};
-
 export default Notification;

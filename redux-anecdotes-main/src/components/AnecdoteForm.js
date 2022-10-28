@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { createAnec } from "../reducers/anecdoteReducer";
-import { notify } from "./Notification";
+import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const AnecdoteForm = () => {
     dispatch(createAnec(anec));
     e.target.anec.value = "";
     const msg = "You have added '" + anec + "'";
-    notify(msg);
+    dispatch(setNotification(msg, 5));
   };
 
   return (
