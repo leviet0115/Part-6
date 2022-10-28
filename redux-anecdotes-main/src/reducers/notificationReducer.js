@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isOn: false,
   msg: "",
+  timeoutId: undefined,
 };
 export const notiSlice = createSlice({
   name: "notification",
@@ -18,20 +19,32 @@ export const notiSlice = createSlice({
     turnOff(state, action) {
       return initialState;
     },
+
+    setTimeoutId(state, action) {
+      return { ...state, timeoutId: action.payload };
+    },
   },
 });
 
 export const setNotification = (msg, time) => {
-  return async (dispatch) => {
-    console.log("setting noti with", msg, "in ", time);
+  return async (dispatch, getState) => {
+    const currentId = getState().notification.timeoutId;
+
+    if (typeof currentId === "number") {
+      clearTimeout(currentId);
+    }
+
     dispatch(turnOn(msg));
-    console.log("noti on");
-    setTimeout(() => {
+
+    const timeoutId = setTimeout(() => {
       dispatch(turnOff());
+      dispatch(setTimeoutId(undefined));
     }, time * 1000);
+
+    dispatch(setTimeoutId(timeoutId));
 
     console.log("noti off");
   };
 };
 
-export const { turnOff, turnOn } = notiSlice.actions;
+export const { turnOff, turnOn, setTimeoutId } = notiSlice.actions;
